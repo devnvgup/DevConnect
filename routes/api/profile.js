@@ -273,11 +273,8 @@ router.get('/github/:username', async (req, res) => {
                     client_seccret=${config.get('githubSeccret')}`,
             method: 'GET',
             headers: { 'user-agent': 'node.js' },
-            host: 'api.github.com',
-            path: '/users/' + req.params.username + '/repos',
         }
         await request(options, (error, response, body) => {
-            console.log(113113, body)
             if (error) console.error(error);
             if (response.statusCode !== 200) return res.status(404).json({ msg: 'No GitHub Profile found' });
             res.json(JSON.parse(body));
