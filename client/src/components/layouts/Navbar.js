@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
+
 import { Link, Outlet } from "react-router-dom";
-import Landing from "./Landing";
 const Navbar = () => {
-  const [hideLanding, setHideLanding] = useState(true);
-  const isHideLanding = () => {
-    if (window.location.href !== "http://localhost:3000/") {
-      setHideLanding(false);
-    }
-  };
-  useEffect(() => {
-    isHideLanding();
-  }, [hideLanding]);
   return (
     <div>
       <nav className="navbar bg-dark">
@@ -34,7 +24,6 @@ const Navbar = () => {
       <div>
         <Outlet />
       </div>
-      {hideLanding && <Landing />}
     </div>
   );
 };
