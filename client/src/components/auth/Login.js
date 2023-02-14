@@ -10,7 +10,6 @@ const Login = ({ login, isAuthenticated }) => {
     password: ''
   })
   const onSubmit = (e) => {
-    console.log(123123)
     const { email, password } = formData
     e.preventDefault()
     login(email, password)
