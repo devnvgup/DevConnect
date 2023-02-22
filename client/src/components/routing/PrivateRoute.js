@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import { Navigate } from 'react-router-dom'
 import Dashboard from '../dashboard/Dashboard'
 
-const PrivateRoute = ({ auth: { isAuthenticated, loading }}) => {
+const PrivateRoute = ({component, auth: { isAuthenticated, loading }}) => {
     return (
        <>
-       {!isAuthenticated && !loading ? <Navigate to ='/login'/> : <Dashboard/> }
+       {!isAuthenticated && !loading ? <Navigate to ='/login'/> : component }
        </>
     )
 }

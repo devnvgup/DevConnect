@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./utils/router";
-import setAuthToken from "./utils/setAuthToken";
+//import setAuthToken from "./utils/setAuthToken";
 import store from './store'
 import { loadUser } from "./actions/auth";
 
