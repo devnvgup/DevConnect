@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createProfile, getCurrentProfile } from '../../actions/profile'
-import { Link, useNavigate } from 'react-router-dom'
-import withRouter from '../../utils/withRouter'
+import { useNavigate } from 'react-router-dom'
 
 const EditProfile = props => {
     const {
@@ -58,19 +57,20 @@ const EditProfile = props => {
         //     instagram: loading || !profile?.social.instagram ? '' : profile?.social.instagram,
         //     linkedin: loading || !profile?.social.linkedin ? '' : profile?.social.linkedin,
         // })
-       
+
         setFormData(() => {
             let obj = {}
             let socialUrl = ['youtube', 'facebook', 'twitter', 'instagram', 'linkedin']
             for (let i = 0; i < Object.keys(formData).length; i++) {
                 let key = Object.keys(formData)[i]
-                if (loading || (!profile?.[key] && !socialUrl.includes(key))
-                ||(!profile?.social?.[key] && socialUrl.includes(key))) {
+                let isSocialUrl = socialUrl.includes(key)
+                if (loading || (!profile?.[key] && !isSocialUrl)
+                    || (!profile?.social?.[key] && isSocialUrl)) {
                     obj[key] = ''
                 } else {
                     if (key === 'skills') {
                         obj[key] = profile[key].join(',')
-                    } else if (socialUrl.includes(key)) {
+                    } else if (isSocialUrl) {
                         obj[key] = profile.social[key]
                     } else {
                         obj[key] = profile[key]
@@ -80,9 +80,9 @@ const EditProfile = props => {
             return obj
         })
 
-        
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loading,profile])
+    }, [loading, profile])
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
