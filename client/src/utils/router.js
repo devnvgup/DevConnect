@@ -10,6 +10,8 @@ import CreateProfile from "../components/profile-forms/CreateProfile";
 import EditProfile from "../components/profile-forms/EditProfile";
 import AddExperience from "../components/profile-forms/AddExperience";
 import AddEducation from "../components/profile-forms/AddEducation";
+import Profile from "../reducers/profile";
+import Profiles from "../components/profiles/Profiles";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -82,6 +84,15 @@ export const router = createBrowserRouter([
           <section className="container">
              <Alert/>
             <PrivateRoute component={<AddEducation/>}/>
+          </section>
+        ),
+      },
+      {
+        path: "/profiles",
+        element: (
+          <section className="container">
+             <Alert/>
+            <Profiles />
           </section>
         ),
       },

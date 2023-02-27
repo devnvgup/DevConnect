@@ -6,6 +6,8 @@ import {
     DELETE_EDU,
     DELETE_EXP,
     GET_PROFILE,
+    GET_PROFILES,
+    GET_REPOS,
     PROFILE_ERROR,
     UPDATE_PROFILE
 } from './types'
@@ -17,6 +19,60 @@ export const getCurrentProfile = () => async dispatch => {
         const res = await axios.get('http://localhost:5000/api/profile/me')
         dispatch({
             type: GET_PROFILE,
+            payload: res.data
+        })
+    } catch (error) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: error.response.statusText, status: error.response.status }
+        })
+    }
+}
+
+// Get all users profiles
+
+export const getProfiles= () => async dispatch => {
+    dispatch({ type: CLEAR_PROFILE });
+    try {
+        const res = await axios.get('http://localhost:5000/api/profile')
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        })
+    } catch (error) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: error.response.statusText, status: error.response.status }
+        })
+    }
+}
+
+// Get  profiles by id
+
+export const getProfileById = (userId) => async dispatch => {
+    dispatch({ type: CLEAR_PROFILE });
+    try {
+        const res = await axios.get(`http://localhost:5000/api/profile/${userId}`)
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        })
+    } catch (error) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: error.response.statusText, status: error.response.status }
+        })
+    }
+}
+
+// Get  Git hub repo
+
+export const getGitHubRepos = (userName) => async dispatch => {
+    dispatch({ type: CLEAR_PROFILE });
+    try {
+        const res = await axios.get(`http://localhost:5000/api/profile/github/${userName}`)
+        dispatch({
+            type: GET_REPOS,
             payload: res.data
         })
     } catch (error) {
@@ -139,29 +195,29 @@ export const deleteExperience = (id) => async dispatch => {
 // Delete Edu
 
 export const deleteEducation = (id) => async dispatch => {
-        try {
-            await axios.delete(`http://localhost:5000/api/profile/education/${id}`)
-            dispatch({
-                type: DELETE_EDU,
-                payload: id
-            })
-            dispatch(setAlert('Delete Success', 'success'))
-        } catch (error) {
-            const errros = await error?.response?.data?.errors
-            if (errros) {
-                errros.forEach(error => dispatch(setAlert(error?.msg, 'danger')))
-            }
-            dispatch({
-                type: PROFILE_ERROR,
-                payload: { msg: error?.response?.statusText, status: error?.response?.status }
-            })
+    try {
+        await axios.delete(`http://localhost:5000/api/profile/education/${id}`)
+        dispatch({
+            type: DELETE_EDU,
+            payload: id
+        })
+        dispatch(setAlert('Delete Success', 'success'))
+    } catch (error) {
+        const errros = await error?.response?.data?.errors
+        if (errros) {
+            errros.forEach(error => dispatch(setAlert(error?.msg, 'danger')))
         }
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: error?.response?.statusText, status: error?.response?.status }
+        })
+    }
 }
 
 // Delete Account and Profile
 
 export const deleteAccount = () => async dispatch => {
-    if (window.confirm("Are you sure> This can Not ne undone")){
+    if (window.confirm("Are you sure> This can Not ne undone")) {
         try {
             await axios.delete(`http://localhost:5000/api/profile`)
             dispatch({

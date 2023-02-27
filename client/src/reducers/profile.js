@@ -1,4 +1,6 @@
-import { CLEAR_PROFILE, DELETE_EDU, DELETE_EXP, GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from "../actions/types"
+import {
+    CLEAR_PROFILE, DELETE_EDU, DELETE_EXP, GET_PROFILE, GET_PROFILES, GET_REPOS, PROFILE_ERROR, UPDATE_PROFILE
+} from "../actions/types"
 
 const initialState = {
     profile: null,
@@ -19,6 +21,12 @@ export default function (state = initialState, action) {
                 profile: payload,
                 loading: false
             }
+        case GET_PROFILES:
+            return {
+                ...state,
+                profiles: payload,
+                loading: false
+            }
         case PROFILE_ERROR:
             return {
                 ...state,
@@ -33,23 +41,29 @@ export default function (state = initialState, action) {
                 loading: false
             }
         case DELETE_EXP: {
-            let experience = state.profile.experience.filter((item)=>{
-                return item._id !==payload
+            let experience = state.profile.experience.filter((item) => {
+                return item._id !== payload
             })
             return {
                 ...state,
-                profile:{...state.profile,experience}
+                profile: { ...state.profile, experience }
             }
         }
         case DELETE_EDU: {
-            let education = state.profile.education.filter((item)=>{
-                return item._id !==payload
+            let education = state.profile.education.filter((item) => {
+                return item._id !== payload
             })
             return {
                 ...state,
-                profile:{...state.profile,education}
+                profile: { ...state.profile, education }
             }
         }
+        case GET_REPOS:
+            return {
+                ...state,
+                repos: payload,
+                loading: false
+            }
 
         default:
             return state
