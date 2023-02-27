@@ -1,6 +1,10 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 import {
+    CLEAR_PROFILE,
+    DELETE_ACCOUNT,
+    DELETE_EDU,
+    DELETE_EXP,
     GET_PROFILE,
     PROFILE_ERROR,
     UPDATE_PROFILE
@@ -107,5 +111,75 @@ export const addEducation = (formData, navigate) => async dispatch => {
             type: PROFILE_ERROR,
             payload: { msg: error.response.statusText, status: error.response.status }
         })
+    }
+}
+
+// Delete Exp
+
+export const deleteExperience = (id) => async dispatch => {
+    try {
+        await axios.delete(`http://localhost:5000/api/profile/experience/${id}`)
+        dispatch({
+            type: DELETE_EXP,
+            payload: id
+        })
+        dispatch(setAlert('Delete Success', 'success'))
+    } catch (error) {
+        const errros = await error?.response?.data?.errors
+        if (errros) {
+            errros.forEach(error => dispatch(setAlert(error?.msg, 'danger')))
+        }
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: error?.response?.statusText, status: error?.response?.status }
+        })
+    }
+}
+
+// Delete Edu
+
+export const deleteEducation = (id) => async dispatch => {
+        try {
+            await axios.delete(`http://localhost:5000/api/profile/education/${id}`)
+            dispatch({
+                type: DELETE_EDU,
+                payload: id
+            })
+            dispatch(setAlert('Delete Success', 'success'))
+        } catch (error) {
+            const errros = await error?.response?.data?.errors
+            if (errros) {
+                errros.forEach(error => dispatch(setAlert(error?.msg, 'danger')))
+            }
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: error?.response?.statusText, status: error?.response?.status }
+            })
+        }
+}
+
+// Delete Account and Profile
+
+export const deleteAccount = () => async dispatch => {
+    if (window.confirm("Are you sure> This can Not ne undone")){
+        try {
+            await axios.delete(`http://localhost:5000/api/profile`)
+            dispatch({
+                type: CLEAR_PROFILE,
+            })
+            dispatch({
+                type: DELETE_ACCOUNT,
+            })
+            dispatch(setAlert(' Account Deleted', 'success'))
+        } catch (error) {
+            const errros = await error?.response?.data?.errors
+            if (errros) {
+                errros.forEach(error => dispatch(setAlert(error?.msg, 'danger')))
+            }
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: error?.response?.statusText, status: error?.response?.status }
+            })
+        }
     }
 }
