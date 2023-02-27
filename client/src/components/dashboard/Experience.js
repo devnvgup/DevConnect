@@ -5,7 +5,6 @@ import { deleteExperience } from '../../actions/profile'
 import {connect} from 'react-redux'
 const Experience = props => {
     const {  experience, deleteExperience } = props
-    console.log(113113, experience)
     const handleDelete = id => {
       deleteExperience(id)
     }

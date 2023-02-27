@@ -10,7 +10,7 @@ import CreateProfile from "../components/profile-forms/CreateProfile";
 import EditProfile from "../components/profile-forms/EditProfile";
 import AddExperience from "../components/profile-forms/AddExperience";
 import AddEducation from "../components/profile-forms/AddEducation";
-import Profile from "../reducers/profile";
+import Profile from "../components/profile/Profile";
 import Profiles from "../components/profiles/Profiles";
 export const router = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         path: "/login",
         element: (
           <section className="container">
-            <Alert/>
+            <Alert />
             <Login />
           </section>
         ),
@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
         path: "/register",
         element: (
           <section className="container">
-             <Alert/>
+            <Alert />
             <Register />
           </section>
         ),
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: (
           <section className="container">
-            <PrivateRoute component={<Dashboard/>}/>
+            <PrivateRoute component={<Dashboard />} />
           </section>
         ),
       },
@@ -55,8 +55,8 @@ export const router = createBrowserRouter([
         path: "/create-profile",
         element: (
           <section className="container">
-             <Alert/>
-            <PrivateRoute component={<CreateProfile/>}/>
+            <Alert />
+            <PrivateRoute component={<CreateProfile />} />
           </section>
         ),
       },
@@ -64,8 +64,8 @@ export const router = createBrowserRouter([
         path: "/edit-profile",
         element: (
           <section className="container">
-             <Alert/>
-            <PrivateRoute component={<EditProfile/>}/>
+            <Alert />
+            <PrivateRoute component={<EditProfile />} />
           </section>
         ),
       },
@@ -73,8 +73,8 @@ export const router = createBrowserRouter([
         path: "/add-experience",
         element: (
           <section className="container">
-             <Alert/>
-            <PrivateRoute component={<AddExperience/>}/>
+            <Alert />
+            <PrivateRoute component={<AddExperience />} />
           </section>
         ),
       },
@@ -82,8 +82,8 @@ export const router = createBrowserRouter([
         path: "/add-education",
         element: (
           <section className="container">
-             <Alert/>
-            <PrivateRoute component={<AddEducation/>}/>
+            <Alert />
+            <PrivateRoute component={<AddEducation />} />
           </section>
         ),
       },
@@ -91,8 +91,17 @@ export const router = createBrowserRouter([
         path: "/profiles",
         element: (
           <section className="container">
-             <Alert/>
+            <Alert />
             <Profiles />
+          </section>
+        ),
+      },
+      {
+        path: "/profile/:id",
+        element: (
+          <section className="container">
+            <Alert />
+            <Profile />
           </section>
         ),
       },

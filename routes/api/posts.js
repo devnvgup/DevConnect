@@ -110,7 +110,6 @@ router.put("/like/:id", auth, async (req, res) => {
 router.put("/unlike/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    console.log(1131113, post)
     // check if the post has been liked
     if (
       post.likes.filter((like) => like.user.toString() === req.user.id).length ===
