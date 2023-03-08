@@ -7,7 +7,7 @@ const ProfileAbout = ({ profile: {
     user: { name }
 } }) => {
     return (
-        <div>
+      
             <div className="profile-about bg-light p-2">
                 {bio && (
                     <>
@@ -27,7 +27,6 @@ const ProfileAbout = ({ profile: {
                   ))}
                 </div>
             </div>
-        </div>
     )
 }
 
