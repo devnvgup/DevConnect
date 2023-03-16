@@ -13,6 +13,7 @@ import AddEducation from "../components/profile-forms/AddEducation";
 import Profile from "../components/profile/Profile";
 import Profiles from "../components/profiles/Profiles";
 import Posts from "../components/posts/Posts";
+import Post from "../components/post/Post";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -112,6 +113,15 @@ export const router = createBrowserRouter([
           <section className="container">
             <Alert />
             <PrivateRoute component={<Posts />} />
+          </section>
+        ),
+      },
+      {
+        path: "/posts/:id",
+        element: (
+          <section className="container">
+            <Alert />
+            <PrivateRoute component={<Post />} />
           </section>
         ),
       },
